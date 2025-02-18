@@ -2,7 +2,7 @@ import { useMutation } from "@tanstack/react-query";
 import Form from "../components/Form";
 import { Navigate } from "react-router-dom";
 const BASE_URL = "http://localhost:3000";
-
+const expireTime = 60 * 60 * 1000;
 export default function SignIn() {
   const mutation = useMutation({
     mutationFn: async (userInfo) => {
@@ -18,9 +18,10 @@ export default function SignIn() {
       if (!response.ok) {
         throw new Error(data.data);
       }
-
-      const token = data.data;
-      localStorage.setItem("token", token);
+      let user = data.data;
+      const now = new Date();
+      user = { ...user, expiry: now.getTime() + expireTime };
+      localStorage.setItem("user", JSON.stringify(user));
       return data;
     },
   });
