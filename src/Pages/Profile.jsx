@@ -1,17 +1,9 @@
-import {
-  Bell,
-  Home,
-  MessageCircleIcon as Message,
-  Search,
-  UserPlus,
-  Users,
-  Pencil,
-} from "lucide-react";
+import { MessageCircleIcon as Message, UserPlus, Pencil } from "lucide-react";
 import avatar from "../assets/avatar.jpg";
 import wallpaper from "../assets/wallpaper.jpg";
 import { useParams } from "react-router-dom";
 import { BASE_URL, hasJWT } from "../../utils";
-import { useQuery, useQueries } from "@tanstack/react-query";
+import { useQueries } from "@tanstack/react-query";
 import { Navigate } from "react-router-dom";
 import { useDisclosure } from "@mantine/hooks";
 import EditProfileForm from "../components/EditProfileForm";
@@ -96,63 +88,6 @@ export default function Profile() {
         centered
         avatar_src={avatar_src}
       />
-      {/* Header */}
-      <header className="bg-white shadow-md fixed top-0 left-0 right-0 z-10">
-        <div className="max-w-6xl mx-auto flex items-center justify-between p-2">
-          <div className="flex items-center">
-            <img
-              src="/placeholder.svg?height=40&width=40"
-              alt="Facebook Logo"
-              width={40}
-              height={40}
-              className="mr-2"
-            />
-            <div className="relative">
-              <input
-                type="text"
-                placeholder="Search Facebook"
-                className="bg-gray-100 rounded-full py-2 px-4 pl-10 w-60 focus:outline-none focus:ring-2 focus:ring-blue-500"
-              />
-              <Search className="absolute left-3 top-2.5 text-gray-500 w-5 h-5" />
-            </div>
-          </div>
-          <nav className="hidden md:flex space-x-2">
-            <a
-              href="#"
-              className="p-2 text-blue-500 border-b-4 border-blue-500"
-            >
-              <Home className="w-6 h-6" />
-            </a>
-            <a
-              href="#"
-              className="p-2 text-gray-500 hover:bg-gray-100 rounded-lg"
-            >
-              <Users className="w-6 h-6" />
-            </a>
-            <a
-              href="#"
-              className="p-2 text-gray-500 hover:bg-gray-100 rounded-lg"
-            >
-              <Message className="w-6 h-6" />
-            </a>
-            <a
-              href="#"
-              className="p-2 text-gray-500 hover:bg-gray-100 rounded-lg"
-            >
-              <Bell className="w-6 h-6" />
-            </a>
-          </nav>
-          <div className="flex items-center space-x-2">
-            <img
-              src="/placeholder.svg?height=40&width=40"
-              alt="Profile"
-              width={40}
-              height={40}
-              className="rounded-full"
-            />
-          </div>
-        </div>
-      </header>
 
       {/* Main Content */}
       <main className="pt-16">
@@ -183,131 +118,66 @@ export default function Profile() {
                   </h1>
                 </div>
                 <div className="mt-6 flex flex-col justify-stretch space-y-3 sm:flex-row sm:space-y-0 sm:space-x-4">
-                  <button
-                    type="button"
-                    className="inline-flex justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-                  >
-                    <UserPlus
-                      className="-ml-1 mr-2 h-5 w-5 text-gray-400"
-                      aria-hidden="true"
-                    />
-                    <span>Add Friend</span>
-                  </button>
-                  <button
-                    type="button"
-                    className="inline-flex justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-                  >
-                    <Message
-                      className="-ml-1 mr-2 h-5 w-5 text-gray-400"
-                      aria-hidden="true"
-                    />
-                    <span>Message</span>
-                  </button>
-                  {hasJWT() && (
-                    <button
-                      onClick={openEditProfileModal}
-                      type="button"
-                      className="inline-flex justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-                    >
-                      <Pencil
-                        className="-ml-1 mr-2 h-5 w-5 text-gray-400"
-                        aria-hidden="true"
-                      />
-                      <span>Edit Profile</span>
-                    </button>
-                  )}
+                  {hasJWT() &&
+                    JSON.parse(localStorage.getItem("user")).userId !=
+                      userId && (
+                      <button
+                        type="button"
+                        className="inline-flex justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                      >
+                        <Message
+                          className="-ml-1 mr-2 h-5 w-5 text-gray-400"
+                          aria-hidden="true"
+                        />
+                        <span>Message</span>
+                      </button>
+                    )}
+                  {hasJWT() &&
+                    JSON.parse(localStorage.getItem("user")).userId ==
+                      userId && (
+                      <button
+                        onClick={openEditProfileModal}
+                        type="button"
+                        className="inline-flex justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                      >
+                        <Pencil
+                          className="-ml-1 mr-2 h-5 w-5 text-gray-400"
+                          aria-hidden="true"
+                        />
+                        <span>Edit Profile</span>
+                      </button>
+                    )}
                 </div>
               </div>
             </div>
-          </div>
-
-          {/* Tabs */}
-          <div className="mt-6 bg-white rounded-lg shadow-md">
-            <nav className="flex">
-              <a
-                href="#"
-                className="px-4 py-3 text-sm font-medium text-gray-900 border-b-2 border-blue-500"
-              >
-                Posts
-              </a>
-              <a
-                href="#"
-                className="px-4 py-3 text-sm font-medium text-gray-500 hover:text-gray-700"
-              >
-                About
-              </a>
-              <a
-                href="#"
-                className="px-4 py-3 text-sm font-medium text-gray-500 hover:text-gray-700"
-              >
-                Friends
-              </a>
-              <a
-                href="#"
-                className="px-4 py-3 text-sm font-medium text-gray-500 hover:text-gray-700"
-              >
-                Photos
-              </a>
-            </nav>
           </div>
 
           {/* Content Area */}
-          <div className="mt-6 grid grid-cols-1 gap-6 lg:grid-cols-3">
-            {/* Left Sidebar */}
-            <div className="lg:col-span-1">
-              <div className="bg-white rounded-lg shadow-md p-6">
-                <h2 className="text-xl font-semibold mb-4">Intro</h2>
-                <p className="text-gray-600 mb-4">
-                  I love coding and building awesome web applications!
-                </p>
-                <button className="w-full px-4 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
-                  Edit Details
-                </button>
-              </div>
-              <div className="mt-6 bg-white rounded-lg shadow-md p-6">
-                <h2 className="text-xl font-semibold mb-4">Friends</h2>
-                <div className="grid grid-cols-3 gap-2">
-                  {[...Array(6)].map((_, i) => (
-                    <div key={i} className="text-center">
-                      <img
-                        src={`/placeholder.svg?height=60&width=60&text=Friend${
-                          i + 1
-                        }`}
-                        alt={`Friend ${i + 1}`}
-                        width={60}
-                        height={60}
-                        className="rounded-md mx-auto"
-                      />
-                      <p className="mt-1 text-xs text-gray-600">
-                        Friend {i + 1}
-                      </p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-
+          <div className="mt-6 flex flex-col items-center">
             {/* Main Content / Posts */}
-            <div className="lg:col-span-2">
+            <div className="lg:col-span-2 w-full lg:w-3/4">
               {/* Create Post */}
-              <div className="bg-white rounded-lg shadow-md p-4 mb-6">
-                <div className="flex items-center space-x-4">
-                  <img
-                    src={avatar_src}
-                    alt="Profile"
-                    width={40}
-                    height={40}
-                    className="rounded-full"
-                  />
-                  <button
-                    onClick={openCreatePostModal}
-                    type="button"
-                    className="flex-grow bg-gray-100 rounded-full py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  >
-                    What's on your mind, John?
-                  </button>
-                </div>
-              </div>
+              {hasJWT() &&
+                JSON.parse(localStorage.getItem("user")).userId == userId && (
+                  <div className="bg-white rounded-lg shadow-md p-4 mb-6">
+                    <div className="flex items-center space-x-4">
+                      <img
+                        src={avatar_src}
+                        alt="Profile"
+                        width={40}
+                        height={40}
+                        className="rounded-full"
+                      />
+                      <button
+                        onClick={openCreatePostModal}
+                        type="button"
+                        className="flex-grow bg-gray-100 rounded-full py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      >
+                        What's on your mind, John?
+                      </button>
+                    </div>
+                  </div>
+                )}
 
               {/* Sample Post */}
               {postQuery.data.map(

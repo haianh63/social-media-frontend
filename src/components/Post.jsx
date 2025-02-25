@@ -10,7 +10,10 @@ import {
 } from "@mantine/core";
 import { ThumbsUp, MessageCircle, Share, Ellipsis } from "lucide-react";
 import { BASE_URL, hasJWT } from "../../utils";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQueryClient, useQuery } from "@tanstack/react-query";
+import ReactionButton from "./ReactionButton";
+import { useDisclosure } from "@mantine/hooks";
+import Comment from "./Comment";
 export default function Post({
   avatar,
   content,
@@ -41,6 +44,15 @@ export default function Post({
     mutation.mutate({ userId, postId });
   };
 
+  const { status, data, error } = useQuery({
+    queryKey: ["post_react", postId],
+    queryFn: async () => {
+      const response = await fetch(`${BASE_URL}/post/react/${postId}`);
+      const data = await response.json();
+      return data.data;
+    },
+  });
+  const [opened, { open, close }] = useDisclosure();
   return (
     <Box bg="white" p="md" radius="md" shadow="sm" mb="lg">
       <Group justify="space-between" align="flex-start">
@@ -76,17 +88,15 @@ export default function Post({
       {image && <Image src={image} alt="Image" radius="md" mb="sm" />}
 
       <Group position="apart" spacing="xs" grow>
-        <Button
-          leftSection={<ThumbsUp size={16} />}
-          variant="subtle"
-          color="gray"
-        >
-          Like
-        </Button>
+        {status === "success" && data && (
+          <ReactionButton postId={postId} reacts={data} />
+        )}
+
         <Button
           leftSection={<MessageCircle size={16} />}
           variant="subtle"
           color="gray"
+          onClick={open}
         >
           Comment
         </Button>
@@ -94,6 +104,7 @@ export default function Post({
           Share
         </Button>
       </Group>
+      <Comment opened={opened} onClose={close} postId={postId} />
     </Box>
   );
 }

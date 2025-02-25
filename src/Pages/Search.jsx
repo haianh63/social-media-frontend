@@ -1,12 +1,14 @@
 import { useQuery } from "@tanstack/react-query";
 import { BASE_URL } from "../../utils";
-import Post from "../components/Post";
-
-export default function Home() {
+import UserCard from "../components/UserCard";
+import { useSearchParams } from "react-router-dom";
+export default function Search() {
+  const [searchParams] = useSearchParams();
+  const keyword = searchParams.get("name");
   const { data, isError, isPending, error } = useQuery({
-    queryKey: ["posts"],
+    queryKey: ["search"],
     queryFn: async () => {
-      const response = await fetch(`${BASE_URL}/post`);
+      const response = await fetch(`${BASE_URL}/user/search?name=${keyword}`);
       const data = await response.json();
       return data.data;
     },
@@ -19,32 +21,24 @@ export default function Home() {
   if (isError) {
     return <h1>An error has occured: {error.message}</h1>;
   }
+
+  console.log(data);
   return (
     <div className="bg-gray-100 min-h-screen">
       <main className="pt-16">
         <div className="mt-6 flex flex-col items-center">
           {/* Main Content / Posts */}
           <div className="lg:col-span-2 w-full sm:w-3/4 lg:w-5/12">
-            {data.map(
-              ({
-                post_id,
-                img_src,
-                content,
-                created_at,
-                avatar_src,
-                user_id,
-              }) => (
-                <Post
-                  key={`post-${post_id}`}
-                  avatar={`${BASE_URL}/${avatar_src}`}
-                  userId={user_id}
-                  postId={post_id}
-                  image={`${BASE_URL}/${img_src}`}
-                  content={content}
-                  created_at={created_at}
+            {data.map(({ user_id, name, avatar_src }) => {
+              return (
+                <UserCard
+                  key={user_id}
+                  name={name}
+                  avatar_src={avatar_src}
+                  user_id={user_id}
                 />
-              )
-            )}
+              );
+            })}
           </div>
         </div>
       </main>
