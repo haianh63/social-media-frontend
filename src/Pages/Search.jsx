@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
-import { BASE_URL } from "../../utils";
 import UserCard from "../components/UserCard";
 import { useSearchParams } from "react-router-dom";
+const BASE_URL = import.meta.env.VITE_BASE_URL;
 export default function Search() {
   const [searchParams] = useSearchParams();
   const keyword = searchParams.get("name");

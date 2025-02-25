@@ -1,7 +1,6 @@
 import { Avatar, Box, Group, Title } from "@mantine/core";
 import { Link } from "react-router-dom";
-import { BASE_URL } from "../../utils";
-
+const BASE_URL = import.meta.env.VITE_BASE_URL;
 const UserCard = ({ name, avatar_src, user_id }) => {
   return (
     <Box

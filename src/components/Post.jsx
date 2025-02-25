@@ -9,11 +9,12 @@ import {
   Menu,
 } from "@mantine/core";
 import { ThumbsUp, MessageCircle, Share, Ellipsis } from "lucide-react";
-import { BASE_URL, hasJWT } from "../../utils";
+import { hasJWT } from "../../utils";
 import { useMutation, useQueryClient, useQuery } from "@tanstack/react-query";
 import ReactionButton from "./ReactionButton";
 import { useDisclosure } from "@mantine/hooks";
 import Comment from "./Comment";
+const BASE_URL = import.meta.env.VITE_BASE_URL;
 export default function Post({
   avatar,
   content,

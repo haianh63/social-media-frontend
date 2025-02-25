@@ -6,10 +6,12 @@ import {
   Search,
   Users,
 } from "lucide-react";
-import { BASE_URL, hasJWT } from "../../utils";
+import { hasJWT } from "../../utils";
 import { useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import { Menu } from "@mantine/core";
+
+const BASE_URL = import.meta.env.VITE_BASE_URL;
 export default function Layout() {
   const navigate = useNavigate();
   const [keyword, setKeyword] = useState("");
@@ -67,6 +69,7 @@ export default function Layout() {
               {links.map(({ href, icon }) => {
                 return (
                   <Link
+                    key={href}
                     to={href}
                     className="p-2 text-gray-500 hover:bg-gray-100 rounded-lg"
                   >

@@ -3,8 +3,7 @@ import { useState } from "react";
 import ImageDropzone from "./ImageDropzone";
 import { useDisclosure } from "@mantine/hooks";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { BASE_URL } from "../../utils";
-
+const BASE_URL = import.meta.env.VITE_BASE_URL;
 export default function EditProfileForm({
   userId,
   nameValue,

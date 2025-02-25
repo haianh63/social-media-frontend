@@ -1,5 +1,4 @@
 import { useQuery } from "@tanstack/react-query";
-import { BASE_URL } from "../../utils";
 import {
   Text,
   ScrollArea,
@@ -14,7 +13,7 @@ import {
 
 import { Paperclip, Mic, Send } from "lucide-react";
 import { useState, useEffect } from "react";
-
+const BASE_URL = import.meta.env.VITE_BASE_URL;
 export default function ChatBox({
   sender_id,
   receiver_id,
@@ -82,9 +81,9 @@ export default function ChatBox({
         Chat
       </Text>
       <ScrollArea style={{ flex: 1 }}>
-        {msgList.map((chat) => {
+        {msgList.map((chat, idx) => {
           return (
-            <Paper shadow="xs" p="sm" mb="sm" radius="md">
+            <Paper key={idx} shadow="xs" p="sm" mb="sm" radius="md">
               <Group
                 justify={chat.sender_id === sender_id ? "flex-end" : undefined}
               >

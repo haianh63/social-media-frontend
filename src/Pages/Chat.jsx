@@ -14,9 +14,9 @@ import avatar from "../assets/avatar.jpg";
 import { Search, Send, Smile, Paperclip, Mic } from "lucide-react";
 import { SocketContext } from "../Context/SocketContext";
 import { useContext, useState, useEffect } from "react";
-import { BASE_URL, hasJWT } from "../../utils";
 import { useQuery } from "@tanstack/react-query";
 import ChatBox from "../components/ChatBox";
+const BASE_URL = import.meta.env.VITE_BASE_URL;
 export default function Chat() {
   const [user, setUser] = useState(null);
   const socket = useContext(SocketContext);

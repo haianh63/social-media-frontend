@@ -1,9 +1,10 @@
 import { Popover, Button, Group, ActionIcon } from "@mantine/core";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { ThumbsUp, Heart, Smile, Frown } from "lucide-react";
-import { BASE_URL, hasJWT } from "../../utils";
+import { hasJWT } from "../../utils";
 import { useState } from "react";
 
+const BASE_URL = import.meta.env.VITE_BASE_URL;
 export default function ReactionButton({ postId, reacts }) {
   const iconList = [
     { icon: <ThumbsUp size={16} />, text: "Like" },
@@ -69,6 +70,7 @@ export default function ReactionButton({ postId, reacts }) {
         <Group>
           {iconList.map((item, idx) => (
             <Button
+              key={item.text}
               variant={hasReaction === idx ? "filled" : "default"}
               onClick={() => {
                 handleReact(idx);

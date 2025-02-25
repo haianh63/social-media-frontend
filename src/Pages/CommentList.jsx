@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import { Box, Group, Input, ScrollArea, Title, Button } from "@mantine/core";
 import CommentThread from "../components/CommentThread";
-import { BASE_URL, hasJWT } from "../../utils";
+import { hasJWT } from "../../utils";
 
+const BASE_URL = import.meta.env.VITE_BASE_URL;
 const CommentList = ({ postId }) => {
   const [comments, setComments] = useState([]);
   const [isLoading, setIsLoading] = useState(false);

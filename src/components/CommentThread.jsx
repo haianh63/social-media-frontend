@@ -15,8 +15,8 @@ import {
   ChevronUp,
   Trash,
 } from "lucide-react";
-import { BASE_URL, hasJWT } from "../../utils";
-
+import { hasJWT } from "../../utils";
+const BASE_URL = import.meta.env.VITE_BASE_URL;
 const CommentThread = ({ comment, onReply, onDelete }) => {
   const [showReplies, setShowReplies] = useState(false);
   const [replyText, setReplyText] = useState("");

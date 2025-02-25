@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
-import { BASE_URL } from "../../utils";
 import Post from "../components/Post";
 
+const BASE_URL = import.meta.env.VITE_BASE_URL;
 export default function Home() {
   const { data, isError, isPending, error } = useQuery({
     queryKey: ["posts"],

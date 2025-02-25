@@ -2,13 +2,15 @@ import { MessageCircleIcon as Message, UserPlus, Pencil } from "lucide-react";
 import avatar from "../assets/avatar.jpg";
 import wallpaper from "../assets/wallpaper.jpg";
 import { useParams } from "react-router-dom";
-import { BASE_URL, hasJWT } from "../../utils";
+import { hasJWT } from "../../utils";
 import { useQueries } from "@tanstack/react-query";
 import { Navigate } from "react-router-dom";
 import { useDisclosure } from "@mantine/hooks";
 import EditProfileForm from "../components/EditProfileForm";
 import CreatePostForm from "../components/CreatePostForm";
 import Post from "../components/Post";
+
+const BASE_URL = import.meta.env.VITE_BASE_URL;
 export default function Profile() {
   const [
     editProfileModalOpened,
