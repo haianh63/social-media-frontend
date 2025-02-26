@@ -66,7 +66,7 @@ export default function Chat() {
                   position="apart"
                   mb="sm"
                   className="hover:bg-gray-200 p-2 rounded-xl cursor-pointer"
-                  onClick={() => setUser(chatUser.receiver_id)}
+                  onClick={() => setUser(chatUser.user_id)}
                 >
                   <Group>
                     <Avatar radius="xl" src={avatar_src} />
