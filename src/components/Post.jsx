@@ -38,6 +38,7 @@ export default function Post({
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["post", userId] });
+      queryClient.invalidateQueries({ queryKey: ["posts"] });
     },
   });
 

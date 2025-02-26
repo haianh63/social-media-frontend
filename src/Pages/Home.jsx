@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import Post from "../components/Post";
+import { Skeleton } from "@mantine/core";
 
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 export default function Home() {
@@ -13,7 +14,17 @@ export default function Home() {
   });
 
   if (isPending) {
-    return <h1>Fetching Data...</h1>;
+    return (
+      <div className="bg-gray-100 min-h-screen">
+        <main className="pt-16">
+          <div className="mt-6 flex flex-col items-center">
+            {isPending && (
+              <Skeleton className="lg:col-span-2 w-full sm:w-3/4 lg:w-5/12" />
+            )}
+          </div>
+        </main>
+      </div>
+    );
   }
 
   if (isError) {
@@ -23,7 +34,6 @@ export default function Home() {
     <div className="bg-gray-100 min-h-screen">
       <main className="pt-16">
         <div className="mt-6 flex flex-col items-center">
-          {/* Main Content / Posts */}
           <div className="lg:col-span-2 w-full sm:w-3/4 lg:w-5/12">
             {data.map(
               ({

@@ -80,12 +80,6 @@ export default function CreatePostModal({
         <Avatar radius="xl" src={avatar_src} alt="user" />
         <div>
           <div style={{ fontWeight: "bold" }}>Ngo Hai Anh</div>
-          <Select
-            data={[{ value: "only_me", label: "Chỉ mình tôi" }]}
-            defaultValue="only_me"
-            size="xs"
-            styles={{ input: { border: "none" } }}
-          />
         </div>
       </Group>
 

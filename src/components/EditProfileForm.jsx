@@ -62,7 +62,16 @@ export default function EditProfileForm({
       const data = await response.json();
       return data;
     },
-    onSuccess: () => {
+    onSuccess: (data) => {
+      const user = JSON.parse(localStorage.getItem("user"));
+      localStorage.setItem(
+        "user",
+        JSON.stringify({
+          ...user,
+          avatar_src: data[0].avatar_src,
+          name: data[0].name,
+        })
+      );
       handleClose();
       queryClient.invalidateQueries({ queryKey: ["user", userId] });
     },

@@ -1,7 +1,7 @@
 import { useMutation } from "@tanstack/react-query";
 import Form from "../components/Form";
 import { Navigate } from "react-router-dom";
-const BASE_URL = "http://localhost:3000";
+const BASE_URL = import.meta.env.VITE_BASE_URL;
 const expireTime = 60 * 60 * 1000;
 export default function SignIn() {
   const mutation = useMutation({

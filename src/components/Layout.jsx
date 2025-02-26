@@ -84,9 +84,7 @@ export default function Layout() {
                   <img
                     src={`${BASE_URL}/${user?.avatar_src}`}
                     alt="Profile"
-                    width={40}
-                    height={40}
-                    className="rounded-full cursor-pointer"
+                    className="w-[40px] h-[40px] object-cover rounded-full cursor-pointer"
                   />
                 </Menu.Target>
 

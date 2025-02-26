@@ -86,14 +86,12 @@ export default function Profile() {
         userId={userId}
         opened={createPostModalOpened}
         onClose={closeCreatePostModal}
-        title="Tạo bài viết"
+        title="Create Post"
         centered
         avatar_src={avatar_src}
       />
 
-      {/* Main Content */}
       <main className="pt-16">
-        {/* Cover Photo */}
         <div className="relative mx-auto w-11/12 xl:w-9/12  h-80 bg-gray-300 rounded-xl">
           <img
             src={cover_src}
@@ -102,7 +100,6 @@ export default function Profile() {
           />
         </div>
 
-        {/* Profile Info */}
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 -mt-20 relative z-10">
           <div className="bg-white rounded-lg shadow-md p-6">
             <div className="sm:flex sm:items-end sm:space-x-5">
@@ -166,16 +163,14 @@ export default function Profile() {
                       <img
                         src={avatar_src}
                         alt="Profile"
-                        width={40}
-                        height={40}
-                        className="rounded-full"
+                        className="w-[40px] h-[40px] object-cover rounded-full"
                       />
                       <button
                         onClick={openCreatePostModal}
                         type="button"
                         className="flex-grow bg-gray-100 rounded-full py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
                       >
-                        What's on your mind, John?
+                        What's on your mind?
                       </button>
                     </div>
                   </div>
