@@ -43,15 +43,17 @@ export default function Home() {
                 created_at,
                 avatar_src,
                 user_id,
+                name,
               }) => (
                 <Post
                   key={`post-${post_id}`}
-                  avatar={`${BASE_URL}/${avatar_src}`}
+                  avatar={avatar_src}
                   userId={user_id}
                   postId={post_id}
-                  image={`${BASE_URL}/${img_src}`}
+                  image={img_src}
                   content={content}
                   created_at={created_at}
+                  name={name}
                 />
               )
             )}

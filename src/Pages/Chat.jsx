@@ -58,7 +58,7 @@ export default function Chat() {
               if (chatUser.avatar_src === null) {
                 avatar_src = avatar;
               } else {
-                avatar_src = `${BASE_URL}/${chatUser.avatar_src}`;
+                avatar_src = chatUser.avatar_src;
               }
               return (
                 <Group

@@ -82,7 +82,7 @@ export default function Layout() {
               <Menu shadow="md" width={200}>
                 <Menu.Target>
                   <img
-                    src={`${BASE_URL}/${user?.avatar_src}`}
+                    src={user?.avatar_src}
                     alt="Profile"
                     className="w-[40px] h-[40px] object-cover rounded-full cursor-pointer"
                   />

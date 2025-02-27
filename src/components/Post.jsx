@@ -22,6 +22,7 @@ export default function Post({
   created_at,
   postId,
   userId,
+  name,
 }) {
   const date = new Date(created_at);
   const queryClient = useQueryClient();
@@ -62,7 +63,7 @@ export default function Post({
           <Avatar src={avatar} radius="xl" />
           <Stack spacing={0}>
             <Text size="sm" weight={500}>
-              John Doe
+              {name}
             </Text>
             <Text size="xs" c="gray.6">
               {date.toDateString()}

@@ -63,13 +63,10 @@ export default function Profile() {
     return <Navigate to="/" replace />;
   }
   const cover_src =
-    userQuery.data.cover_src === null
-      ? wallpaper
-      : `${BASE_URL}/${userQuery.data.cover_src}`;
+    userQuery.data.cover_src === null ? wallpaper : userQuery.data.cover_src;
   const avatar_src =
-    userQuery.data.avatar_src === null
-      ? avatar
-      : `${BASE_URL}/${userQuery.data.avatar_src}`;
+    userQuery.data.avatar_src === null ? avatar : userQuery.data.avatar_src;
+
   return (
     <div className="bg-gray-100 min-h-screen">
       <EditProfileForm
@@ -178,15 +175,16 @@ export default function Profile() {
 
               {/* Sample Post */}
               {postQuery.data.map(
-                ({ post_id, img_src, content, created_at }) => (
+                ({ post_id, img_src, content, created_at, name }) => (
                   <Post
                     key={`post-${post_id}`}
                     avatar={avatar_src}
                     userId={userId}
                     postId={post_id}
-                    image={`${BASE_URL}/${img_src}`}
+                    image={img_src}
                     content={content}
                     created_at={created_at}
+                    name={name}
                   />
                 )
               )}

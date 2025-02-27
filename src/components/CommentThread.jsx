@@ -26,7 +26,7 @@ const CommentThread = ({ comment, onReply, onDelete }) => {
     <Box ml={comment.parent_comment_id ? 20 : 0} py={10}>
       {/* Comment */}
       <Group align="flex-start">
-        <Avatar src={`${BASE_URL}/${comment.avatar_src}`} radius="xl" />
+        <Avatar src={comment.avatar_src} radius="xl" />
         <Stack spacing={4} style={{ flex: 1 }}>
           <Group spacing="xs">
             <Text weight={600}>{comment.name}</Text>

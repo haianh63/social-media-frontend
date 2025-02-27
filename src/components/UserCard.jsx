@@ -9,7 +9,7 @@ const UserCard = ({ name, avatar_src, user_id }) => {
       to={`/profile/${user_id}`}
     >
       <Group align="center">
-        <Avatar src={`${BASE_URL}/${avatar_src}`} size={50} radius="xl" />
+        <Avatar src={avatar_src} size={50} radius="xl" />
         <Box>
           <Title order={5}>{name}</Title>
         </Box>

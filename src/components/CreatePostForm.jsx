@@ -6,6 +6,7 @@ import {
   Avatar,
   Select,
   ActionIcon,
+  LoadingOverlay,
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { Image, Send } from "lucide-react";
@@ -25,6 +26,7 @@ export default function CreatePostModal({
   const [imageFile, setImageFile] = useState(null);
 
   const [opened, { open, close }] = useDisclosure(false);
+  const [visible, { toggle }] = useDisclosure(false);
   const queryClient = useQueryClient();
   const mutation = useMutation({
     mutationFn: ({ content, image }) => {
@@ -33,6 +35,7 @@ export default function CreatePostModal({
       formData.append("content", content);
       formData.append("image", image);
 
+      toggle();
       return fetch(`${BASE_URL}/post/${user?.userId}/create`, {
         method: "POST",
         headers: {
@@ -46,6 +49,7 @@ export default function CreatePostModal({
       setContent("");
       setImage(null);
       setImageFile(null);
+      toggle();
       onClose();
     },
   });
@@ -76,6 +80,11 @@ export default function CreatePostModal({
       }}
       {...props}
     >
+      <LoadingOverlay
+        visible={visible}
+        zIndex={1000}
+        overlayProps={{ radius: "sm", blur: 2 }}
+      />
       <Group align="center" spacing="sm">
         <Avatar radius="xl" src={avatar_src} alt="user" />
         <div>

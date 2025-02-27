@@ -87,7 +87,7 @@ export default function ChatBox({
               <Group
                 justify={chat.sender_id === sender_id ? "flex-end" : undefined}
               >
-                <Avatar radius="xl" src={`${BASE_URL}/${chat.avatar_src}`} />
+                <Avatar radius="xl" src={chat.avatar_src} />
                 <Box>
                   <Text weight={500}>{chat.name}</Text>
                   <Text size="sm">{chat.content}</Text>

@@ -1,4 +1,12 @@
-import { Button, Flex, Input, Modal, Stack, Text } from "@mantine/core";
+import {
+  Button,
+  Flex,
+  Input,
+  Modal,
+  Stack,
+  Text,
+  LoadingOverlay,
+} from "@mantine/core";
 import { useState } from "react";
 import ImageDropzone from "./ImageDropzone";
 import { useDisclosure } from "@mantine/hooks";
@@ -21,6 +29,7 @@ export default function EditProfileForm({
 
   const [editingField, setEditingField] = useState(null);
   const [opened, { open, close }] = useDisclosure(false);
+  const [visible, { toggle }] = useDisclosure(false);
 
   const handleOpenModal = (field) => {
     setEditingField(field);
@@ -51,6 +60,7 @@ export default function EditProfileForm({
       formData.append("name", name);
       formData.append("avatar", avatarFile);
       formData.append("cover", coverFile);
+      toggle();
       const response = await fetch(`${BASE_URL}/user/${userId}/edit`, {
         method: "POST",
         headers: {
@@ -72,6 +82,7 @@ export default function EditProfileForm({
           name: data[0].name,
         })
       );
+      toggle();
       handleClose();
       queryClient.invalidateQueries({ queryKey: ["user", userId] });
     },
@@ -92,6 +103,11 @@ export default function EditProfileForm({
   };
   return (
     <Modal {...props} onClose={handleClose}>
+      <LoadingOverlay
+        visible={visible}
+        zIndex={1000}
+        overlayProps={{ radius: "sm", blur: 2 }}
+      />
       <form onSubmit={handleSubmit} encType="multipart/form-data">
         <div className="bg-[#2D2D2D] w-full max-w-2xl rounded-lg shadow-xl">
           <div className="p-6 space-y-6">
