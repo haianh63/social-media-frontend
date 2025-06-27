@@ -1,8 +1,19 @@
-# React + Vite
+# Social Media Website
+## Installation for local dev environment
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+- clone project
 
-Currently, two official plugins are available:
+`git clone https://github.com/haianh63/social-media-frontend.git`
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Install frontend (client) dependencies
+
+`npm install`
+
+## Env file
+Create .env file with this content
+
+`VITE_BASE_URL=http://localhost:5000`
+
+## Run project
+
+`npm run dev`
