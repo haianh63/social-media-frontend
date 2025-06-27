@@ -12,7 +12,7 @@
 ## Env file
 Create .env file with this content
 
-`VITE_BASE_URL=http://localhost:5000`
+`VITE_BASE_URL=http://localhost:3000`
 
 ## Run project
 
